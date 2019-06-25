@@ -3,10 +3,11 @@ clearvars
 close all
 %% Inputs
 P_1= 1e3; P_2= 2e3;
-E_new=[7.3084e10];
+E=[7.3084e10];
 Area=[2.38761e-4];
 I=[4.32157e-8];
-M_Info=[1,1;1,1;1,1;1,1;1,1;1,1;1,1;1,1;1,1;1,1;1,1;1,1;1,1;];
+%%edited
+M_Info=[Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1);Area(1),E(1)];
 Nodes_Coordinates=[0,0;3,0;6,0;9,0;0,4;3,4;6,4;9,4];
 Connection=[1,2;2,3;3,4;5,6;6,7;7,8;1,5;2,6;3,7;4,8;1,6;2,7;4,7];
 Constr=[0,0;NaN,NaN;NaN,NaN;NaN,0;NaN,NaN;NaN,NaN;NaN,NaN;NaN,NaN];
@@ -27,8 +28,9 @@ for i=1:Nm
     Lm=sqrt(dx^2+dy^2);
     Cx=dx/Lm;
     Cy=dy/Lm;
-    Em=E_new(M_Info(i,1));
-    Ame=Area(M_Info(i,2));
+    %%edited
+    Em=M_Info(i,2);
+    Ame=M_Info(i,1);
     Dof=[2*N1-1,2*N1,2*N2-1,2*N2];    
     Smd(:,:,i)=Em*Ame/Lm*[Cx^2 Cx*Cy -Cx^2 -Cx*Cy;
                           Cx*Cy Cy^2 -Cx*Cy -Cy^2;
@@ -142,4 +144,3 @@ for i=1:Nm
     title(['Bending Diagram of member ',num2str(i)])
 end
 Am
-
